@@ -9,8 +9,10 @@ function App() {
             <form className="formdata">
               <label>Title</label>
               <input type="text" className="title"/>
+              <br/>
               <label>Description</label>
               <textarea className="details" rows="6"/>
+              <br/>
               <button>Add</button>
             </form>
           </section>
