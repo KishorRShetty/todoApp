@@ -20,6 +20,8 @@ const Sidebar = () => {
     );
     if (todoList.filter((l) => l.title === formData.title).length > 0) {
       console.log("already exist");
+    } else if (formData.title.length < 1) {
+      console.log("required field");
     } else {
       setTodoList([...todoList, formData]);
       // setTodoList({...todoList, formData});

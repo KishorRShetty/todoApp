@@ -5,11 +5,19 @@ const Content = () => {
   const { todoList } = ListState();
   console.log("content: " + JSON.stringify(todoList));
   return todoList.length > 0 ? (
-    <ul>
+    // <ul>
+    //   {todoList.map((e) => (
+    //     <li key={e.title}>{e.title}</li>
+    //   ))}
+    // </ul>
+    <div className="list">
       {todoList.map((e) => (
-        <li key={e.title}>{e.title}</li>
+        <fieldset className="fset" key={e.title}>
+          <legend>{e.title}</legend>
+          <p>{e.description}</p>
+        </fieldset>
       ))}
-    </ul>
+    </div>
   ) : (
     <p>List is Empty</p>
   );

@@ -1,0 +1,13 @@
+.fset{
+    border: 1px solid tomato;
+}
+.fset legend{
+    font-size: larger;
+    font-weight: bold;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+}
