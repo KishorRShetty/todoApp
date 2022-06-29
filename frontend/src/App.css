@@ -17,7 +17,9 @@
 .sidebar {
   flex: 1;
   border-right: 1px solid #34ebd5;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .content {
@@ -25,50 +27,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.formdata {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
-  padding: 5px;
-  margin-top: 30%;
-  /* align-items didn't work. Need to fix this */
-}
-
-.formdata label {
-  font-size: small;
-  font-weight: bold;
-  color: #34ebd5;
-}
-
-.formdata>input,
-textarea {
-  outline: none;
-  font-size: 20px;
-  border: 1px solid #34ebd5;
-  background-color: #34ebd63d;
-  color: white;
-}
-
-.formdata input {
-  height: 40px;
-}
-
-.formdata button {
-  padding: 8px;
-  font-size: large;
-  border: none;
-  background-color: #000000;
-  color: #61dafb;
-  border: 1px double #34ebd5;
-  box-shadow: 0px 2px 4px 0px #34ebd5;
-  outline: none;
-}
-
-.formdata button:hover {
-  box-shadow: 0px 3px 6px 0px #34ebd5;
-  cursor: pointer;
-  color: white;
 }
