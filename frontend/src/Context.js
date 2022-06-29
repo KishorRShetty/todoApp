@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const todoContext = createContext();
 
 function Context({ children }) {
-  const [todoList, setTodoList] = useState("Hello");
+  const [todoList, setTodoList] = useState([]);
 
   return (
     <todoContext.Provider value={{ todoList, setTodoList }}>
