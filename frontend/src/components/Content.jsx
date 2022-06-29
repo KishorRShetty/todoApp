@@ -1,10 +1,18 @@
-import { useContext } from "react";
-import { todoContext } from "../Context";
+import { ListState } from "../Context";
 import "./Content.css";
 
 const Content = () => {
-  const { todoList } = useContext(todoContext);
-  return <p>{todoList.length > 0 ? todoList : "Empty List"}</p>;
+  const { todoList } = ListState();
+  console.log("content: " + JSON.stringify(todoList));
+  return todoList.length > 0 ? (
+    <ul>
+      {todoList.map((e) => (
+        <li key={e.title}>{e.title}</li>
+      ))}
+    </ul>
+  ) : (
+    <p>List is Empty</p>
+  );
 };
 
 export default Content;

@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import { useState } from "react";
-import { todoContext } from "../Context";
+import { ListState } from "../Context";
 import "./Sidebar.css";
 
 const Sidebar = () => {
   // const listContext = useContext(todoContext);
-  const {todoList, setTodoList} = useContext(todoContext);
+  const { todoList, setTodoList } = ListState();
 
   const formDefault = {
     title: "",
@@ -19,14 +18,14 @@ const Sidebar = () => {
     console.log(
       `Form: ${JSON.stringify(formData)}\nList: ${JSON.stringify(todoList)}`
     );
-    // if (todoList.filter((l) => l.title === formData.title).length > 0) {
-    //   console.log("already exist");
-    // } else {
-    //   // setTodoList([...todoList, formData]);
-    //   setTodoList({...todoList, ...formData});
-    // }
-    setTodoList([...todoList, formData]);
-    // console.table(todoList);
+    if (todoList.filter((l) => l.title === formData.title).length > 0) {
+      console.log("already exist");
+    } else {
+      setTodoList([...todoList, formData]);
+      // setTodoList({...todoList, formData});
+    }
+    // setTodoList([...todoList, formData]);
+    console.table(todoList);
   };
 
   const collectForm = (event) => {
