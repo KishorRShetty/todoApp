@@ -1,9 +1,10 @@
-import "./Content.css"
-const Content = () =>{
-return (
-    <p>Content works</p>
-)
-}
+import { useContext } from "react";
+import { todoContext } from "../Context";
+import "./Content.css";
 
+const Content = () => {
+  const listContext = useContext(todoContext);
+  return <p>{listContext.todoList}</p>;
+};
 
 export default Content;
