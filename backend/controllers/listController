@@ -1,0 +1,15 @@
+exports.addlist = () => {
+  console.log("addlist");
+};
+exports.readAlllist = () => {
+  console.log("readAlllist");
+};
+exports.readOnelist = () => {
+  console.log("readOnelist");
+};
+exports.updateOne = () => {
+  console.log("updateOne");
+};
+exports.deleteOne = () => {
+  console.log("deleteOne");
+};

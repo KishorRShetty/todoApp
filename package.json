@@ -2,9 +2,10 @@
   "name": "todoapp",
   "version": "1.0.0",
   "description": "fullstack todo list using MERN",
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node backend/server.js"
   },
   "repository": {
     "type": "git",
