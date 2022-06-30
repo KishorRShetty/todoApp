@@ -1,13 +1,27 @@
-.fset{
-    border: 1px solid tomato;
+.fset {
+  border: 1px solid tomato;
 }
-.fset legend{
-    font-size: larger;
-    font-weight: bold;
+.fset legend {
+  font-size: x-large;
+  font-weight: bold;
+  color: tomato;
 }
-.list{
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    margin: auto;
+
+.edit:hover,
+.delete:hover {
+  color: #34ebd5;
+  cursor: pointer;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+}
+
+.ltitle {
+  vertical-align: 3px;
+}
+.ltitle:hover{
+    cursor: none;
 }
