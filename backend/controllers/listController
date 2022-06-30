@@ -11,14 +11,27 @@ exports.addlist = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: error.message.includes('E11000')? 'Duplicate Title' :error.message,
-    //   message: error.message
+      message: error.message.includes("E11000")
+        ? "Duplicate Title"
+        : error.message,
+      //   message: error.message
     });
   }
 };
 
-exports.readAlllist = () => {
-  console.log("readAlllist");
+exports.readAlllist = async (req, res) => {
+  try {
+    const list = await listModel.find({});
+    res.status(200).json({
+      success: true,
+      list,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "No Records",
+    });
+  }
 };
 exports.readOnelist = () => {
   console.log("readOnelist");
