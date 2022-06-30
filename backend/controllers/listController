@@ -29,16 +29,73 @@ exports.readAlllist = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "No Records",
+      message: error.message,
     });
   }
 };
-exports.readOnelist = () => {
-  console.log("readOnelist");
+exports.readOnelist = async (req, res) => {
+  try {
+    const oneItem = await listModel.findById(req.params.id);
+
+    if (!oneItem) {
+      res.status(400).json({
+        success: false,
+        message: "Id not found",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        oneItem,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
-exports.updateOne = () => {
-  console.log("updateOne");
+exports.updateOne = async (req, res) => {
+  try {
+    let isList = await listModel.findById(req.params.id);
+    if (!isList) {
+      res.status(400).json({
+        success: false,
+        message: "Id not found",
+      });
+    } else {
+      isList = await listModel.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      });
+      res.status(200).json({
+        success: true,
+        isList,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
-exports.deleteOne = () => {
-  console.log("deleteOne");
+exports.deleteOne = async (req, res) => {
+  try {
+    const isList = await listModel.findByIdAndDelete(req.params.id);
+    if (!isList) {
+      res.status(400).json({
+        success: false,
+        message: "Id not found",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
