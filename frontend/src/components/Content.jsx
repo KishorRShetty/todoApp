@@ -7,14 +7,8 @@ import { TbMinusVertical } from "react-icons/tb";
 import axios from "axios";
 
 const Content = () => {
-  const {
-    todoList,
-    setTodoList,
-    formData,
-    setFormData,
-    editMode,
-    setEditMode,
-  } = ListState();
+  const { todoList, setTodoList, setFormData, setEditMode, formDefault } =
+    ListState();
   // console.log("content: " + JSON.stringify(todoList));
 
   async function deleteItem(id) {
@@ -24,6 +18,7 @@ const Content = () => {
     if (!delList) return;
     console.log(delList.status);
     await setTodoList(todoList.filter((p) => p._id !== id));
+    setFormData(formDefault);
     console.log(todoList);
     console.log("list" + JSON.stringify(todoList.map((a) => a._id)));
   }

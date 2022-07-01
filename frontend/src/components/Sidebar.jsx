@@ -57,9 +57,9 @@ const Sidebar = () => {
 
   const updateList = async (event) => {
     event.preventDefault();
-    alert(formData.title);
+    // alert(formData.title);
     if (todoList.filter((l) => l.title === formData.title).length > 0) {
-      console.log("already exist");
+      console.log("Unchanged");
       return;
     } else if (formData.title.length < 1) {
       console.log("required field");
@@ -87,44 +87,46 @@ const Sidebar = () => {
     }
   };
   return (
-    <form className="formdata">
-      <label>Title</label>
-      <input
-        autoFocus={true}
-        onChange={collectForm}
-        type="text"
-        className="title"
-        name="title"
-        value={formData.title}
-      />
-      <br />
-      <label>Description</label>
-      <textarea
-        onChange={collectForm}
-        className="details"
-        rows="6"
-        name="description"
-        value={formData.description}
-      />
-      <br />
-      {editMode ? (
-        <div style={{ display: "flex" }}>
-          <button style={{ color: "tomato", flex: "2" }} onClick={updateList}>
-            Update
-          </button>
-          <button
-            onClick={() => {
-              setEditMode(false);
-              setFormData(formDefault);
-            }}
-          >
-            Discard
-          </button>
-        </div>
-      ) : (
-        <button onClick={addToList}>Add</button>
-      )}
-    </form>
+    <>
+      <form className="formdata">
+        <label>Title</label>
+        <input
+          autoFocus={true}
+          onChange={collectForm}
+          type="text"
+          className="title"
+          name="title"
+          value={formData.title}
+        />
+        <br />
+        <label>Description</label>
+        <textarea
+          onChange={collectForm}
+          className="details"
+          rows="6"
+          name="description"
+          value={formData.description}
+        />
+        <br />
+        {editMode ? (
+          <div style={{ display: "flex" }}>
+            <button style={{ color: "tomato", flex: "2" }} onClick={updateList}>
+              Update
+            </button>
+            <button
+              onClick={() => {
+                setEditMode(false);
+                setFormData(formDefault);
+              }}
+            >
+              Discard
+            </button>
+          </div>
+        ) : (
+          <button onClick={addToList}>Add</button>
+        )}
+      </form>
+    </>
   );
 };
 
