@@ -1,8 +1,10 @@
 import React from "react";
+import { ListState } from "../Context";
 import "./Snackbar.css";
 
 function Snackbar() {
-  return <div>Snackbar</div>;
+  const { snackMsg } = ListState();
+  return <div className="snackbar">{snackMsg}</div>;
 }
 
 export default Snackbar;

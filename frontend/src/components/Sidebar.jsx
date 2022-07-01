@@ -12,6 +12,7 @@ const Sidebar = () => {
     editMode,
     setEditMode,
     formDefault,
+    setSnackMsg,
   } = ListState();
 
   // const formDefault = {
@@ -27,18 +28,22 @@ const Sidebar = () => {
       `Form: ${JSON.stringify(formData)}\nList: ${JSON.stringify(todoList)}`
     );
     if (todoList.filter((l) => l.title === formData.title).length > 0) {
-      console.log("already exist");
+      // console.log("already exist");
+      setSnackMsg(`${formData.title} Already Exist`);
       return;
     } else if (formData.title.length < 1) {
-      console.log("required field");
+      // console.log("required field");
+      setSnackMsg(`Title is required`);
+
       return;
     } else {
       await axios
         .post(`http://127.0.0.1:4001/api/v1/add`, { ...formData })
         .then(function (response) {
           setTodoList([...todoList, response.data.list]);
-          console.log("responseId: " + response.data.list._id);
-          console.log(response);
+          // console.log("responseId: " + response.data.list._id);
+          // console.log(response);
+          setSnackMsg(`Added ${response.data.list.title}`);
         })
         .catch(function (error) {
           console.log(error);
@@ -59,10 +64,14 @@ const Sidebar = () => {
     event.preventDefault();
     // alert(formData.title);
     if (todoList.filter((l) => l.title === formData.title).length > 0) {
-      console.log("Unchanged");
+      // console.log("Unchanged");
+      setSnackMsg(`${formData.title} is unchanged`);
+
       return;
     } else if (formData.title.length < 1) {
-      console.log("required field");
+      // console.log("required field");
+      setSnackMsg(`Titile is required`)
+
       return;
     } else {
       await axios
@@ -79,10 +88,12 @@ const Sidebar = () => {
           );
           console.log("responseId: " + response.data.isList);
           console.log(response);
+          setSnackMsg(`Updated to ${formData.title}`)
         })
         .catch(function (error) {
           console.log(error.message);
           console.log("Failed to Update");
+          setSnackMsg(`Failed to Update`);
         });
     }
   };

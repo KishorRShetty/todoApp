@@ -11,6 +11,7 @@ function Context({ children }) {
   const [todoList, setTodoList] = useState([]);
   const [formData, setFormData] = useState(formDefault);
   const [editMode, setEditMode] = useState(false);
+  const [snackMsg, setSnackMsg] = useState('test snack');
   useEffect(() => {
     const fetchList = async function () {
       const list = await axios.get("http://127.0.0.1:4001/api/v1/readAll");
@@ -31,6 +32,8 @@ function Context({ children }) {
         editMode,
         setEditMode,
         formDefault,
+        snackMsg,
+        setSnackMsg
       }}
     >
       {children}

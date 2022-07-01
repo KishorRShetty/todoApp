@@ -1,6 +1,7 @@
 import "./App.css";
 import Content from "./components/Content";
 import Sidebar from "./components/Sidebar";
+import Snackbar from "./components/Snackbar";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Content />
         </section>
       </main>
+      <Snackbar />
     </div>
   );
 }

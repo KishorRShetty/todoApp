@@ -1,0 +1,11 @@
+.snackbar {
+  height: 40px;
+  width: 40vw;
+  /* background-color: black; */
+  border: thin dotted tomato;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+}

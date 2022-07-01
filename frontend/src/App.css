@@ -1,3 +1,9 @@
+.App{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .App-link {
   text-align: center;
   color: #34ebd6c7;
