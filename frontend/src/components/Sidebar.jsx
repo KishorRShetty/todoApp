@@ -4,7 +4,15 @@ import "./Sidebar.css";
 
 const Sidebar = () => {
   // const listContext = useContext(todoContext);
-  const { todoList, setTodoList, formData, setFormData } = ListState();
+  const {
+    todoList,
+    setTodoList,
+    formData,
+    setFormData,
+    editMode,
+    setEditMode,
+    formDefault,
+  } = ListState();
 
   // const formDefault = {
   //   title: "",
@@ -28,10 +36,7 @@ const Sidebar = () => {
       await axios
         .post(`http://127.0.0.1:4001/api/v1/add`, { ...formData })
         .then(function (response) {
-          setTodoList([
-            ...todoList,
-            { _id: response.data.list._id, ...formData },
-          ]);
+          setTodoList([...todoList, response.data.list]);
           console.log("responseId: " + response.data.list._id);
           console.log(response);
         })
@@ -48,6 +53,38 @@ const Sidebar = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const updateList = async (event) => {
+    event.preventDefault();
+    alert(formData.title);
+    if (todoList.filter((l) => l.title === formData.title).length > 0) {
+      console.log("already exist");
+      return;
+    } else if (formData.title.length < 1) {
+      console.log("required field");
+      return;
+    } else {
+      await axios
+        .put(`http://127.0.0.1:4001/api/v1/readOne/${formData._id}`, {
+          ...formData,
+        })
+        .then(function (response) {
+          //fetchALl again or update local object when no error ??
+          // setTodoList([...todoList, response.data.isList]);
+          setTodoList(
+            [response.data.isList].concat(
+              todoList.filter((f) => f._id !== formData._id)
+            )
+          );
+          console.log("responseId: " + response.data.isList);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error.message);
+          console.log("Failed to Update");
+        });
+    }
   };
   return (
     <form className="formdata">
@@ -70,7 +107,23 @@ const Sidebar = () => {
         value={formData.description}
       />
       <br />
-      <button onClick={addToList}>Add</button>
+      {editMode ? (
+        <div style={{ display: "flex" }}>
+          <button style={{ color: "tomato", flex: "2" }} onClick={updateList}>
+            Update
+          </button>
+          <button
+            onClick={() => {
+              setEditMode(false);
+              setFormData(formDefault);
+            }}
+          >
+            Discard
+          </button>
+        </div>
+      ) : (
+        <button onClick={addToList}>Add</button>
+      )}
     </form>
   );
 };

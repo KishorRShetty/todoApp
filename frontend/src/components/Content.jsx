@@ -7,7 +7,14 @@ import { TbMinusVertical } from "react-icons/tb";
 import axios from "axios";
 
 const Content = () => {
-  const { todoList, setTodoList } = ListState();
+  const {
+    todoList,
+    setTodoList,
+    formData,
+    setFormData,
+    editMode,
+    setEditMode,
+  } = ListState();
   // console.log("content: " + JSON.stringify(todoList));
 
   async function deleteItem(id) {
@@ -21,12 +28,27 @@ const Content = () => {
     console.log("list" + JSON.stringify(todoList.map((a) => a._id)));
   }
 
+  async function editItem(id) {
+    await axios
+      .get(`http://127.0.0.1:4001/api/v1/readOne/${id}`)
+      .then(function (response) {
+        setFormData(response.data.oneItem);
+        setEditMode(true);
+        console.log("responseId: " + response.data.oneItem._id);
+        console.log(response.data.oneItem);
+      })
+      .catch(function (error) {
+        console.log(error);
+        console.log("Failed to Update");
+      });
+  }
+
   return todoList.length > 0 ? (
     <div className="list">
       {todoList.map((e) => (
         <fieldset className="fset" key={e._id}>
           <legend>
-            <BiEditAlt className="edit" />
+            <BiEditAlt onClick={() => editItem(e._id)} className="edit" />
             <AiOutlineDelete
               onClick={() => deleteItem(e._id)}
               className="delete"

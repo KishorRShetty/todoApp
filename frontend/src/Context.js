@@ -10,6 +10,7 @@ function Context({ children }) {
   // const [todoList, setTodoList] = useState([{title:'hello',description:'Hi'}]);
   const [todoList, setTodoList] = useState([]);
   const [formData, setFormData] = useState(formDefault);
+  const [editMode, setEditMode] = useState(false);
   useEffect(() => {
     const fetchList = async function () {
       const list = await axios.get("http://127.0.0.1:4001/api/v1/readAll");
@@ -21,7 +22,17 @@ function Context({ children }) {
   }, []);
 
   return (
-    <todoContext.Provider value={{ todoList, setTodoList, formData, setFormData }}>
+    <todoContext.Provider
+      value={{
+        todoList,
+        setTodoList,
+        formData,
+        setFormData,
+        editMode,
+        setEditMode,
+        formDefault,
+      }}
+    >
       {children}
     </todoContext.Provider>
   );
