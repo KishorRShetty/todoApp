@@ -11,12 +11,14 @@ const Content = () => {
   // console.log("content: " + JSON.stringify(todoList));
 
   async function deleteItem(id) {
-    const delList = await axios.delete(`http://127.0.0.1:4001/api/v1/readOne/${id}`);
+    const delList = await axios.delete(
+      `http://127.0.0.1:4001/api/v1/readOne/${id}`
+    );
     if (!delList) return;
     console.log(delList.status);
     await setTodoList(todoList.filter((p) => p._id !== id));
     console.log(todoList);
-    console.log('list'+ JSON.stringify(todoList.map(a=>a._id)));
+    console.log("list" + JSON.stringify(todoList.map((a) => a._id)));
   }
 
   return todoList.length > 0 ? (

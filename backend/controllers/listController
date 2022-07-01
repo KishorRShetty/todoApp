@@ -1,7 +1,7 @@
 const listModel = require("../models/todoModel");
 
 exports.addlist = async (req, res) => {
-  //   console.log("addlist");
+    console.log(req.body);
   try {
     const list = await listModel.create(req.body);
     res.status(201).json({

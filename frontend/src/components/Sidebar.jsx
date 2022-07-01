@@ -1,33 +1,46 @@
-import { useState } from "react";
+import axios from "axios";
 import { ListState } from "../Context";
 import "./Sidebar.css";
 
 const Sidebar = () => {
   // const listContext = useContext(todoContext);
-  const { todoList, setTodoList } = ListState();
+  const { todoList, setTodoList, formData, setFormData } = ListState();
 
-  const formDefault = {
-    title: "",
-    description: "",
-  };
+  // const formDefault = {
+  //   title: "",
+  //   description: "",
+  // };
   // const [list, setList] = useState([]);
-  const [formData, setFormData] = useState(formDefault);
+  // const [formData, setFormData] = useState(formDefault);
 
-  const addToList = (event) => {
+  const addToList = async (event) => {
     event.preventDefault();
     console.log(
       `Form: ${JSON.stringify(formData)}\nList: ${JSON.stringify(todoList)}`
     );
     if (todoList.filter((l) => l.title === formData.title).length > 0) {
       console.log("already exist");
+      return;
     } else if (formData.title.length < 1) {
       console.log("required field");
+      return;
     } else {
-      setTodoList([...todoList, formData]);
-      // setTodoList({...todoList, formData});
+      await axios
+        .post(`http://127.0.0.1:4001/api/v1/add`, { ...formData })
+        .then(function (response) {
+          setTodoList([
+            ...todoList,
+            { _id: response.data.list._id, ...formData },
+          ]);
+          console.log("responseId: " + response.data.list._id);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+          console.log("Failed to Add");
+        });
     }
-    // setTodoList([...todoList, formData]);
-    console.table(todoList);
+    console.log(todoList);
   };
 
   const collectForm = (event) => {
