@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "start": "node backend/server.js",
-    "heroku-postbuild":"npm install --prefix todoApp && npm run build --prefix todoApp"
+    "heroku-postbuild":"npm install --prefix frontend && npm run build --prefix frontend"
 
   },
   "repository": {
