@@ -70,7 +70,7 @@ const Sidebar = () => {
       return;
     } else if (formData.title.length < 1) {
       // console.log("required field");
-      setSnackMsg(`Titile is required`)
+      setSnackMsg(`Titile is required`);
 
       return;
     } else {
@@ -79,16 +79,25 @@ const Sidebar = () => {
           ...formData,
         })
         .then(function (response) {
-          //fetchALl again or update local object when no error ??
+          //fetchALl again or update local object when no error ?? maintains the order on fetch
           // setTodoList([...todoList, response.data.isList]);
+
+          // setTodoList(
+          //   [response.data.isList].concat(
+          //     todoList.filter((f) => f._id !== formData._id)
+          //   )
+          // );
+
           setTodoList(
-            [response.data.isList].concat(
-              todoList.filter((f) => f._id !== formData._id)
-            )
+            todoList.map((localListObj) => {
+              return localListObj._id === response.data.isList._id
+                ? response.data.isList
+                : localListObj;
+            })
           );
           console.log("responseId: " + response.data.isList);
           console.log(response);
-          setSnackMsg(`Updated to ${formData.title}`)
+          setSnackMsg(`Updated to ${formData.title}`);
         })
         .catch(function (error) {
           console.log(error.message);
