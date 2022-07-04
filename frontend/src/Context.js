@@ -14,7 +14,7 @@ function Context({ children }) {
   const [snackMsg, setSnackMsg] = useState('test snack');
   useEffect(() => {
     const fetchList = async function () {
-      const list = await axios.get("http://127.0.0.1:4001/api/v1/readAll");
+      const list = await axios.get("/api/v1/readAll");
       console.log(list.data.list);
       console.log(list.data);
       setTodoList(list.data.list);

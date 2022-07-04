@@ -38,7 +38,7 @@ const Sidebar = () => {
       return;
     } else {
       await axios
-        .post(`http://127.0.0.1:4001/api/v1/add`, { ...formData })
+        .post(`/api/v1/add`, { ...formData })
         .then(function (response) {
           setTodoList([...todoList, response.data.list]);
           // console.log("responseId: " + response.data.list._id);
@@ -75,7 +75,7 @@ const Sidebar = () => {
       return;
     } else {
       await axios
-        .put(`http://127.0.0.1:4001/api/v1/readOne/${formData._id}`, {
+        .put(`/api/v1/readOne/${formData._id}`, {
           ...formData,
         })
         .then(function (response) {

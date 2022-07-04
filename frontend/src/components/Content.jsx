@@ -19,7 +19,7 @@ const Content = () => {
 
   async function deleteItem(id) {
     const delList = await axios.delete(
-      `http://127.0.0.1:4001/api/v1/readOne/${id}`
+      `/api/v1/readOne/${id}`
     );
     if (!delList) return;
     console.log(delList.status);
@@ -32,7 +32,7 @@ const Content = () => {
 
   async function editItem(id) {
     await axios
-      .get(`http://127.0.0.1:4001/api/v1/readOne/${id}`)
+      .get(`/api/v1/readOne/${id}`)
       .then(function (response) {
         setFormData(response.data.oneItem);
         setEditMode(true);
